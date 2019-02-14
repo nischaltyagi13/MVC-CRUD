@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Employee.Models.Employeelist>
+
+@{
+    ViewBag.Title = "EmployeeManager";
+}
+@Styles.Render("//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css")
+<h2>EmployeeManager</h2>
+
+<p>
+    @Html.ActionLink("Add New", "AddNewEmp")
+</p>
+<p>
+    @using (Html.BeginForm("EmployeeManager", "Home", FormMethod.Get))
+    {
+        <b> Search by &nbsp;</b> @Html.RadioButton("searchby", "FirstName", true)<b> First Name</b>
+        @Html.RadioButton("searchby", "Designation") <b> Designation</b><br />
+        @Html.TextBox("search") <input type="submit" value=" Search" />
+    }
+</p>
+<table class="table" id="example">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prefix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Designation)
+        </th>
+        <th>Action</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prefix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                    @Html.ActionLink("Add Credintial", "AddCredential", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="~/Content/jquery.dataTables.min.js"></script>
+<script src="~/Content/dataTables.bootstrap.js"></script>
+<script src="~/Content/datatables.init.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.noConflict();
+        $('#example').DataTable();
+
+    });
+</script>
